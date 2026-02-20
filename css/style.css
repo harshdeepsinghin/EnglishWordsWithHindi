@@ -262,6 +262,28 @@ body {
     border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
+/* ===== Back Nav (Quiz Pages) ===== */
+.back-nav {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 24px 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.back-link:hover {
+    color: var(--accent-light);
+}
+
 /* ===== Quiz Page Layout ===== */
 .quiz-header {
     text-align: center;
