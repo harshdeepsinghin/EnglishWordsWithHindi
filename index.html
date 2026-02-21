@@ -34,26 +34,8 @@
 
             <section class="quizzes-grid" id="quizzes">
                 <h2 class="section-title">Available Quizzes</h2>
-
-                <div class="quiz-cards">
-                    <a href="quizzes/fifty-quiz-1.html" class="quiz-card" id="quiz-card-1">
-                        <div class="quiz-card-badge">50 Words</div>
-                        <div class="quiz-card-icon">🎯</div>
-                        <h3>Vocabulary Quiz 1</h3>
-                        <p>Daily vocabulary — from <em>Tranche</em> to <em>Incommode</em>. Advanced words with Hindi
-                            meanings.</p>
-                        <div class="quiz-card-footer">
-                            <span class="quiz-card-tag">Intermediate–Advanced</span>
-                            <span class="quiz-card-arrow">→</span>
-                        </div>
-                    </a>
-
-                    <!-- More quiz cards will go here -->
-                    <div class="quiz-card quiz-card--coming-soon" id="quiz-card-coming">
-                        <div class="quiz-card-icon">🔮</div>
-                        <h3>More Coming Soon</h3>
-                        <p>New quizzes will be added regularly. Keep practicing!</p>
-                    </div>
+                <div class="quiz-cards" id="quiz-cards">
+                    <!-- Cards rendered by JS from quiz-config.js -->
                 </div>
             </section>
         </main>
@@ -62,6 +44,44 @@
             <p>EnglishWordsWithHindi — Learn a new word every day 🌟</p>
         </footer>
     </div>
+
+    <script src="js/quiz-config.js"></script>
+    <script>
+        // Render quiz cards from QUIZ_LIST config
+        (function () {
+            const container = document.getElementById('quiz-cards');
+            if (typeof QUIZ_LIST === 'undefined') return;
+
+            const icons = ['🎯', '📝', '🔤', '💡', '🧠', '📖', '✨', '🎓', '🔥', '⚡'];
+
+            let html = '';
+            QUIZ_LIST.forEach((quiz, i) => {
+                const icon = icons[i % icons.length];
+                html += `
+                    <a href="quiz.html?id=${quiz.id}" class="quiz-card">
+                        <div class="quiz-card-badge">${quiz.words} Words</div>
+                        <div class="quiz-card-icon">${icon}</div>
+                        <h3>${quiz.title}</h3>
+                        <p>${quiz.description}</p>
+                        <div class="quiz-card-footer">
+                            <span class="quiz-card-tag">${quiz.level}</span>
+                            <span class="quiz-card-arrow">→</span>
+                        </div>
+                    </a>
+                `;
+            });
+
+            html += `
+                <div class="quiz-card quiz-card--coming-soon">
+                    <div class="quiz-card-icon">🔮</div>
+                    <h3>More Coming Soon</h3>
+                    <p>New quizzes added regularly. Keep practicing!</p>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        })();
+    </script>
 </body>
 
 </html>

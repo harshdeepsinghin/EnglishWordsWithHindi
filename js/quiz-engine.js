@@ -194,7 +194,7 @@
                 <p class="results-message">${message}</p>
                 <div class="results-actions">
                     <button class="btn btn-primary" id="retry-btn">🔄 Try Again</button>
-                    <a href="../index.html" class="btn btn-secondary">← All Quizzes</a>
+                    <a href="index.html" class="btn btn-secondary">← All Quizzes</a>
                 </div>
             </div>
         `;

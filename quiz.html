@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz | EnglishWordsWithHindi</title>
+    <meta name="description"
+        content="English vocabulary quiz with Hindi meanings. Test yourself with multiple choice questions and get instant explanations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app">
+        <nav class="back-nav">
+            <a href="index.html" class="back-link">← Back</a>
+        </nav>
+
+        <main class="main">
+            <div class="quiz-header">
+                <h1 id="quiz-title">Vocabulary Quiz</h1>
+                <p id="quiz-subtitle">10 words · Multiple choice · Instant feedback</p>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="progress-text">Question 1 of 10</span>
+                    <span class="progress-score" id="score-text">Score: 0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div id="quiz-container">
+                <p style="text-align:center;color:var(--text-muted);padding:40px 0;">Loading quiz...</p>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>EnglishWordsWithHindi — Learn a new word every day 🌟</p>
+        </footer>
+    </div>
+
+    <script>
+        // Read quiz ID from URL and dynamically load the data file
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id') || '1';
+
+            // Update title
+            document.getElementById('quiz-title').textContent = 'Vocabulary Quiz ' + id;
+            document.title = 'Quiz ' + id + ' | EnglishWordsWithHindi';
+
+            // Load the quiz data script
+            const script = document.createElement('script');
+            script.src = 'js/quizzes/quiz-' + id + '.js';
+            script.onload = function () {
+                // Once data is loaded, load the engine
+                const engine = document.createElement('script');
+                engine.src = 'js/quiz-engine.js';
+                document.body.appendChild(engine);
+            };
+            script.onerror = function () {
+                document.getElementById('quiz-container').innerHTML =
+                    '<p style="text-align:center;color:var(--red);padding:40px 0;">Quiz not found. <a href="index.html" style="color:var(--accent);">Go back</a></p>';
+            };
+            document.body.appendChild(script);
+        })();
+    </script>
+</body>
+
+</html>
